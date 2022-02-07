@@ -1,0 +1,190 @@
+﻿<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+
+        $(document).ready(function GetJson() {
+
+            $.ajax({
+                url: "/User/GetJson",
+                method: "GET",
+                data: {
+                    "one": "Singular sensation",
+                    "two": "Beady little eyes",
+                    "three": "Little birds pitch by my doorstep" },
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    //var obj = $.getJSON(data);
+                    //console.log(obj);
+                    //console.log(obj.EmailId);
+                    var val = '';
+
+                    $.each(data, function (index, val) {
+                        //var email = index.emailId;
+                        //console.log(email);
+                        var row = $("<tr><td>" + index + "</td><td>" + val + "</td>");
+                        $('#user tbody').append(row);
+
+                    });
+                },
+
+                //success: function (data) {
+
+                //    $.each(data, function (key, value) {
+                //        $.each(this, function (key, val) {
+                //            console.log(val.UserName);
+                            
+                //        });
+                        
+                //        var d = data.UserName;
+                //        var t = data.EmailId;
+                //        debugger;
+                //        var rows = "<tr>"
+                //            + "<td class='prtoducttd'>" + data.UserName + "</td>"
+                //            + "<td class='prtoducttd'>" + data.EmailId + "</td>"
+                //            + "</tr>";
+                //        $('#user tbody').append(rows);
+                //    });
+                    
+
+                //    //data = JSON.parse(data);
+                //    console.log(data);
+
+                //    //$('td#Name').append(text(data.UserName));
+                //    //$('td#Email').text(data.EmailId);
+                //},
+                error: function (e) {
+                    console.error(e);
+                }
+            })
+
+        });
+
+
+
+
+    </script>
+</head>
+<body>
+    <h2>Get Users</h2>
+    <input id="btn" type="button" value="Get All Users" />
+    <input id="btnClear" type="button" value="Clear" />
+    <div id="OutputDiv"></div>
+     <br />
+     <table id="user">
+         
+         <tbody></tbody>
+
+
+     </table>
+
+
+</body>
+
+<div>
+    <a asp-action="AddUser">Add Users</a>
+</div>
+
+
+<!--<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var ulUsers = $('#ulUsers');
+            $('#btn').click(function () {
+                $.ajax({
+                    url: 'http://localhost:56522/User/GetJson',
+                    method: 'GET',
+                    success: function (data) {
+                        data = JSON.parse(data);
+                        console.log(data);
+                        ulUsers.empty();
+                        $.each(data.val, function (index, val) {
+                            var Name = val.UserId + ' ' + val.UserName + ' ' + val.EmailId + ' ' + val.IsDeleted;
+                            // var Email = val.EmailId;
+                            ulUsers.append('<li>' + Name + '</li>')
+                        });
+                    }
+                });
+            });
+
+            $('#btnClear').click(function () {
+                ulUsers.empty();
+            });
+        });
+
+
+    </script>
+
+</head>
+<body>
+    <input id="btn" type="button" value="Get All Users" />
+    <input id="btnClear" type="button" value="Clear" />
+    <div id="OutputDiv"></div>
+    <ul id="ulUsers"></ul>-->
+
+    @*<script type="text/javascript">
+            $(document).ready(function () {
+
+
+                //$('#btn').click(function GetJson() {
+                //    // Call Web API to get a list of Product
+                //    $.ajax({
+                //        url: 'User/GetJson',
+                //        type: 'GET',
+                //        dataType: 'json',
+                //        success: function (products) {
+                //            productListSuccess(products);
+                //        },
+                //        error: function (request, message, error) {
+                //            handleException(request, message, error);
+                //        }
+                //    });
+                //});
+
+
+                //$('#btn').click(function () {
+                //    $('#OutputDiv').load('http://localhost:56522/User/GetJson');
+
+                //});
+
+
+
+            //    $('#btn').click(function () {
+            //        $('#ulUsers').load('GetUsers.cshtml');
+            //    });
+
+                var ulUsers = $('#ulUsers');
+                $('#btn').click(function GetJson() {
+                    $.ajax({
+                        type: 'GET',
+                        url: 'http://localhost:56522/User/GetJson',
+                        data: getJSON,
+                        contentType: 'json',
+                        success: function (data) {
+                            ulUsers.empty();
+                            $.each(data.val, function (index, val) {
+                                var Name = val.UserId + ' ' + val.UserName + ' ' + val.EmailId + ' ' + val.IsDeleted;
+                                // var Email = val.EmailId;
+                                ulUsers.append('<li>' + Name + '</li>')
+                            });
+                        }
+                    });
+                });
+
+                $('#btnClear').click(function () {
+                    ulUsers.empty();
+                });
+            });
+
+
+        </script>*@
+
+<!--</body>-->
+
+

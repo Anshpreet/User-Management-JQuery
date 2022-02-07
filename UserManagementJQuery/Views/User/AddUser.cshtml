@@ -1,0 +1,71 @@
+﻿@model UserManagementJQuery.Models.User
+
+@{
+    ViewData["Title"] = "AddUser";
+}
+
+<head>
+
+
+
+    <script type="text/javascript">
+    function send() {
+        var user = {
+            UserName: $("#name").val(),
+            EmailId:$("#email").val(),
+            IsDeleted:$("#is").val()
+        }
+
+        $('#target').html('sending..');
+
+        $.ajax({
+            url: '/User/AddUser',
+            type: 'post',
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('#target').html(data.msg);
+            },
+            data: JSON.stringify(user)
+        });
+    }
+    </script>
+</head>
+
+<h1>AddUser</h1>
+
+<h4>User</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddUser">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserName" id="name" class="control-label"></label>
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmailId" id="email" class="control-label"></label>
+                <input asp-for="EmailId" class="form-control" />
+                <span asp-validation-for="EmailId" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" id="is" asp-for="IsDeleted" /> @Html.DisplayNameFor(model => model.IsDeleted)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" onclick="send()" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
